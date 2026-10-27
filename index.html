@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Falcnix — Core Web Vitals, measured</title>
+<meta name="description" content="Before and after Lighthouse runs on a synthetic WooCommerce-pattern store page: performance 37 to 100, LCP 50.6s to 1.0s.">
+<style>
+  :root{
+    --ink:#0A0A0A; --panel:#141414; --paper:#F6F6F6; --card:#FFFFFF;
+    --border:#E5E5E5; --text:#111111; --muted:#6B6B6B;
+    --good:#15803D; --bad:#B91C1C;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--text);
+    font-family:Inter,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px}
+  header{background:var(--ink); color:#FAFAFA; padding:56px 0 48px}
+  .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:-0.5px; font-size:20px}
+  .tile{width:32px; height:32px; background:#FAFAFA; color:#0A0A0A; display:grid; place-items:center;
+        font-weight:800; font-size:19px; border-radius:5px}
+  h1{font-size:clamp(28px,4.6vw,42px); line-height:1.12; letter-spacing:-1.2px; margin:34px 0 12px; font-weight:800}
+  .lede{color:#B9B9B9; font-size:17px; max-width:62ch; margin:0}
+  main{padding:48px 0 24px}
+  h2{font-size:13px; text-transform:uppercase; letter-spacing:1.4px; color:var(--muted);
+     font-weight:700; margin:44px 0 14px}
+  h2:first-child{margin-top:0}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:10px; overflow:hidden}
+  table{width:100%; border-collapse:collapse; font-size:15px}
+  th,td{padding:13px 16px; text-align:right; border-bottom:1px solid var(--border)}
+  th:first-child,td:first-child{text-align:left; font-weight:600}
+  thead th{font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); font-weight:700}
+  tbody tr:last-child td{border-bottom:none}
+  .before{color:var(--bad); font-variant-numeric:tabular-nums}
+  .after{color:var(--good); font-variant-numeric:tabular-nums; font-weight:700}
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .stat{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:20px}
+  .stat .k{font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); font-weight:700}
+  .stat .v{font-size:30px; font-weight:800; letter-spacing:-1px; margin-top:6px; font-variant-numeric:tabular-nums}
+  .stat .d{font-size:13px; color:var(--muted); margin-top:2px}
+  ul{padding-left:20px; margin:0}
+  li{margin:7px 0}
+  a{color:var(--ink); text-underline-offset:3px}
+  .links{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .link{display:block; background:var(--card); border:1px solid var(--border); border-radius:10px;
+        padding:18px 20px; text-decoration:none; color:inherit}
+  .link:hover{border-color:#BDBDBD}
+  .link strong{display:block; font-size:15px}
+  .link span{font-size:13px; color:var(--muted)}
+  .note{font-size:13.5px; color:var(--muted); max-width:70ch}
+  footer{border-top:1px solid var(--border); margin-top:48px; padding:24px 0 48px;
+         font-size:13px; color:var(--muted); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+  @media (max-width:640px){
+    .split,.links{grid-template-columns:1fr}
+    th,td{padding:11px 12px; font-size:14px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand"><span class="tile">F</span> Falcnix</div>
+    <h1>Core Web Vitals, measured — not claimed.</h1>
+    <p class="lede">One slow store page rebuilt to pass all three Core Web Vitals on mobile. Same content, same images, same products. Only the delivery changed.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <h2>Result — Lighthouse 12.8.2, mobile, simulated throttling</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Metric</th><th>Before</th><th>After</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Performance score</td><td class="before">37</td><td class="after">100</td></tr>
+        <tr><td>Largest Contentful Paint</td><td class="before">50.6 s</td><td class="after">1.0 s</td></tr>
+        <tr><td>Total Blocking Time</td><td class="before">890 ms</td><td class="after">0 ms</td></tr>
+        <tr><td>Cumulative Layout Shift</td><td class="before">0.042</td><td class="after">0</td></tr>
+        <tr><td>First Contentful Paint</td><td class="before">7.2 s</td><td class="after">0.9 s</td></tr>
+        <tr><td>Page weight</td><td class="before">10,516 KiB</td><td class="after">61 KiB</td></tr>
+        <tr><td>Requests</td><td class="before">16</td><td class="after">8</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>What was actually wrong</h2>
+  <ul>
+    <li><strong>Hero image shipped as a 1.7 MB PNG</strong> at 1200px wide, displayed at 360px. Seven product images repeated the pattern: 9.2 MB of PNG for 1.6 MB of visible JPEG quality.</li>
+    <li><strong>Render-blocking CSS</strong> — 440 KB across two files loaded before first paint, including a plugin stylesheet where a third of the selectors were never used on the page.</li>
+    <li><strong>604 KB of JavaScript</strong> in the critical path: jQuery, a slider library, a theme bundle and a visitor-tracking script, all parsed before the page could respond.</li>
+    <li><strong>No dimension attributes</strong> on images, so the layout reflowed as each one decoded.</li>
+  </ul>
+
+  <h2>What changed</h2>
+  <ul>
+    <li>Images resized to their real display width, converted to JPEG at quality 78, lazy-loaded below the fold, with explicit width/height on every one.</li>
+    <li>Hero image preloaded; every other image deferred.</li>
+    <li>CSS split into critical (inlined) and deferred; unused plugin CSS dropped.</li>
+    <li>Slider and tracker scripts removed from the critical path; the theme bundle deferred.</li>
+    <li>Result: 8 requests, 61 KiB, nothing blocking the first paint.</li>
+  </ul>
+
+  <h2>The full runs</h2>
+  <div class="links">
+    <a class="link" href="reports/before-mobile.html">
+      <strong>Before — score 37 →</strong>
+      <span>Complete Lighthouse report, all four categories</span>
+    </a>
+    <a class="link" href="reports/after-mobile.html">
+      <strong>After — score 100 →</strong>
+      <span>Complete Lighthouse report, same settings</span>
+    </a>
+  </div>
+
+  <h2>What this is, precisely</h2>
+  <p class="note">
+    This is a synthetic store page built to reproduce a common WooCommerce failure pattern: full-size PNGs,
+    stacked plugin CSS, and a slider on the critical path. It is not a client site, and no client data appears
+    anywhere on this page. The numbers come from the saved Lighthouse JSON, run on the same machine, same
+    Chrome build, same throttling settings — mobile form factor, simulated slow 4G — before and after the
+    rebuild. Both reports are published unedited.
+  </p>
+
+  <footer>
+    <span>Falcnix — web performance for WordPress and WooCommerce</span>
+    <span>Last run 2026-10-26</span>
+  </footer>
+</main>
+
+</body>
+</html>

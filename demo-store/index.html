@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Aurora Home — Warm pieces for every room</title>
+<meta name="description" content="Aurora Home — warm, honest homeware. Throws, ceramics, linens. Free shipping over $75."/>
+
+<!-- Aurora Home v4.2.1 — "the way we've always shipped it" -->
+<link rel="stylesheet" href="css/theme.css"/>
+<link rel="stylesheet" href="css/plugins.css"/>
+<link rel="stylesheet" href="css/icons.css"/>
+
+<!-- All of it, render-blocking, in the head. Just like 2016. -->
+<script src="js/jquery.js"></script>
+<script src="js/slider.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/tracker.js"></script>
+<script>
+// "Personalization bootstrap" — runs before anything paints. Yes, really.
+(function () {
+  var t0 = Date.now(), sink = 0;
+  for (var i = 0; i < 80000000; i++) { sink += (i % 7) + (i >> 3); }
+  window.__aurora_warmup_ms = Date.now() - t0;
+  window.__aurora_sink = sink;
+})();
+</script>
+
+<style>
+  /* small base layer that accidentally got left inline */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, 'Times New Roman', serif; background: #FAF7F2; color: #23281F; line-height: 1.6; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 22px; }
+  a { color: inherit; text-decoration: none; }
+  .topbar { background: #23281F; color: #F3EFE7; font-size: 13px; }
+  .topbar .wrap { display: flex; justify-content: space-between; padding-top: 8px; padding-bottom: 8px; }
+  header.site { background: #FAF7F2; border-bottom: 1px solid #E7DFD2; position: sticky; top: 0; z-index: 50; }
+  header.site .wrap { display: flex; align-items: center; gap: 34px; padding-top: 18px; padding-bottom: 18px; }
+  .logo { font-size: 26px; font-weight: 700; letter-spacing: .5px; }
+  .logo span { color: #B4552D; }
+  nav.main { display: flex; gap: 26px; font-size: 15px; }
+  .cart { margin-left: auto; font-size: 15px; }
+  .cart b { background: #B4552D; color: #fff; border-radius: 999px; padding: 1px 8px; font-size: 12px; margin-left: 6px; }
+  .hero { position: relative; overflow: hidden; }
+  .hero img { width: 100%; display: block; }
+  .hero .overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 min(8vw, 120px); color: #FFF8EF; }
+  .hero h1 { font-size: clamp(30px, 4.6vw, 54px); line-height: 1.12; max-width: 620px; text-shadow: 0 2px 18px rgba(20,12,6,.45); }
+  .hero p { max-width: 460px; margin-top: 14px; font-size: 17px; text-shadow: 0 1px 10px rgba(20,12,6,.4); }
+  .btn { display: inline-block; background: #B4552D; color: #fff; padding: 13px 30px; border-radius: 4px; font-size: 15px; margin-top: 22px; border: none; cursor: pointer; }
+  section.products { padding: 66px 0 26px; }
+  section.products h2 { font-size: 30px; margin-bottom: 6px; }
+  section.products .sub { color: #8A8272; margin-bottom: 30px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr 1fr; } .hero p { display: none; } }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } nav.main { display: none; } }
+  .card { background: #fff; border: 1px solid #EDE6DA; border-radius: 8px; overflow: hidden; }
+  .card img { width: 100%; display: block; }
+  .card .body { padding: 16px 18px 20px; }
+  .card h3 { font-size: 17px; }
+  .card .price { color: #B4552D; font-weight: 700; margin-top: 4px; }
+  .card .add { margin-top: 12px; width: 100%; background: #23281F; color: #fff; border: none; padding: 11px 0; border-radius: 4px; cursor: pointer; font-size: 14px; }
+  .props { background: #F1EBE0; margin-top: 60px; padding: 40px 0; }
+  .props .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; text-align: center; font-size: 14.5px; }
+  @media (max-width: 760px) { .props .wrap { grid-template-columns: 1fr 1fr; } }
+  .props .big { font-size: 26px; display: block; margin-bottom: 6px; }
+  .newsletter { background: #23281F; color: #F3EFE7; padding: 58px 0; text-align: center; }
+  .newsletter h2 { font-size: 26px; }
+  .newsletter p { color: #B9B2A2; margin-top: 8px; }
+  .newsletter form { margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .newsletter input { padding: 13px 16px; border-radius: 4px; border: none; min-width: 280px; font-size: 15px; }
+  footer.site { background: #1B1F18; color: #A8A291; padding: 54px 0 30px; font-size: 14px; }
+  footer.site .cols { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 26px; }
+  @media (max-width: 860px) { footer.site .cols { grid-template-columns: 1fr 1fr; } }
+  footer.site h4 { color: #F3EFE7; margin-bottom: 12px; font-size: 14px; letter-spacing: .6px; }
+  footer.site li { list-style: none; margin-bottom: 8px; }
+  footer.site .fine { border-top: 1px solid #2C3226; margin-top: 36px; padding-top: 18px; display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 12.5px; }
+  .promo-bar { background: #B4552D; color: #fff; text-align: center; font-size: 14px; padding: 10px 14px; }
+  .promo-bar a { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="topbar">
+    <div class="wrap"><span>Free shipping over $75 · 30-day returns</span><span>USD $ · EN · Help</span></div>
+  </div>
+  <div class="wrap">
+    <div class="logo">Aurora<span>.</span>Home</div>
+    <nav class="main">
+      <a href="#">Home</a><a href="#products">Shop</a><a href="#products">Collections</a><a href="#">Journal</a><a href="#footer">Contact</a>
+    </nav>
+    <div class="cart">Cart <b id="cart-count">2</b></div>
+  </div>
+</header>
+
+<section class="hero">
+  <img src="images/hero.png" alt="Autumn collection styled on a wooden table"/>
+  <div class="overlay">
+    <h1>The Autumn Edit</h1>
+    <p>Warm, honest pieces for the season — thrown, woven and finished by hand in small batches.</p>
+    <div><button class="btn" id="hero-cta">Shop the collection</button></div>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <div class="wrap">
+    <h2>Featured pieces</h2>
+    <div class="sub">Small batches. Restocked most Fridays.</div>
+    <div class="grid" id="product-grid">
+      <div class="card">
+        <img src="images/p1.png" alt="Sage linen pillow"/>
+        <div class="body"><h3>Sage Linen Pillow</h3><div class="price">$39</div><button class="add">Add to cart</button></div>
+      </div>
+      <div class="card">
+        <img src="images/p2.png" alt="Clay ceramic vase"/>
+        <div class="body"><h3>Clay Ceramic Vase</h3><div class="price">$58</div><button class="add">Add to cart</button></div>
+      </div>
+      <div class="card">
+        <img src="images/p3.png" alt="Slate wool throw"/>
+        <div class="body"><h3>Slate Wool Throw</h3><div class="price">$89</div><button class="add">Add to cart</button></div>
+      </div>
+      <div class="card">
+        <img src="images/p4.png" alt="Terracotta serving bowl"/>
+        <div class="body"><h3>Terracotta Serving Bowl</h3><div class="price">$45</div><button class="add">Add to cart</button></div>
+      </div>
+      <div class="card">
+        <img src="images/p5.png" alt="Sand oak serving board"/>
+        <div class="body"><h3>Sand Oak Board</h3><div class="price">$52</div><button class="add">Add to cart</button></div>
+      </div>
+      <div class="card">
+        <img src="images/p6.png" alt="Plum rattan basket"/>
+        <div class="body"><h3>Plum Rattan Basket</h3><div class="price">$64</div><button class="add">Add to cart</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="props">
+  <div class="wrap">
+    <div><span class="big">🚚</span>Free shipping over $75</div>
+    <div><span class="big">↩️</span>30-day easy returns</div>
+    <div><span class="big">🛡️</span>Secure checkout</div>
+    <div><span class="big">💬</span>Real humans, 7 days</div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="wrap">
+    <h2>Slow down. Get the letter.</h2>
+    <p>New pieces, studio notes, and restock alerts. No noise.</p>
+    <form onsubmit="return false;">
+      <input type="email" placeholder="you@example.com" aria-label="Email address"/>
+      <button class="btn" style="margin-top:0">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer class="site" id="footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo" style="color:#F3EFE7">Aurora<span>.</span>Home</div>
+        <p style="margin-top:12px; max-width:280px">Warm, honest homeware. Made in small batches, shipped from our studio.</p>
+      </div>
+      <div><h4>SHOP</h4><ul><li><a href="#">New in</a></li><li><a href="#">Bestsellers</a></li><li><a href="#">Sale</a></li><li><a href="#">Gift cards</a></li></ul></div>
+      <div><h4>HELP</h4><ul><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">FAQ</a></li><li><a href="#">Contact</a></li></ul></div>
+      <div><h4>ABOUT</h4><ul><li><a href="#">Our story</a></li><li><a href="#">Materials</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Press</a></li></ul></div>
+      <div><h4>FOLLOW</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Pinterest</a></li><li><a href="#">Facebook</a></li><li><a href="#">TikTok</a></li></ul></div>
+    </div>
+    <div class="fine">
+      <span>© 2026 Aurora Home. All rights reserved.</span>
+      <span>Demo store used for website-speed testing. Not a real shop.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Aurora Theme frontend "features" — written the way bloated themes write them.
+(function () {
+  // 1) Promo bar injected after 0.9s -> shoves everything down (hello, CLS)
+  setTimeout(function () {
+    var bar = document.createElement('div');
+    bar.className = 'promo-bar';
+    bar.innerHTML = 'Autumn sale — up to 30% off throws &amp; ceramics. <a href="#products">Shop now</a>';
+    document.body.insertBefore(bar, document.body.firstChild);
+  }, 900);
+
+  // 2) Hero "slider" rotation
+  var slides = [
+    ['The Autumn Edit', 'Warm, honest pieces for the season — thrown, woven and finished by hand in small batches.'],
+    ['New: Clay &amp; Slate', 'Ceramics and wool, restocked every Friday.'],
+    ['Made in small batches', 'No mass production. Ever.']
+  ];
+  var idx = 0;
+  var h1 = document.querySelector('.hero h1');
+  var pp = document.querySelector('.hero p');
+  if (h1) setInterval(function () {
+    idx = (idx + 1) % slides.length;
+    h1.textContent = slides[idx][0];
+    pp.textContent = slides[idx][1];
+  }, 5000);
+
+  // 3) Parallax on scroll (recalculated on every scroll event, of course)
+  var heroImg = document.querySelector('.hero img');
+  window.addEventListener('scroll', function () {
+    if (heroImg) heroImg.style.transform = 'translateY(' + (window.scrollY * 0.08) + 'px)';
+  });
+
+  // 4) Second long task — deferred "analytics enrichment"
+  setTimeout(function () {
+    var s = '', j = 0;
+    for (var i = 0; i < 40000000; i++) { j += i % 13; }
+    window.__aurora_enrich = j;
+  }, 1600);
+
+  // 5) Cart bump on add
+  var count = 2, el = document.getElementById('cart-count');
+  document.querySelectorAll('.add').forEach(function (b) {
+    b.addEventListener('click', function () { el.textContent = ++count; });
+  });
+})();
+</script>
+
+</body>
+</html>
